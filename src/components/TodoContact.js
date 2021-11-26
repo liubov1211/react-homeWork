@@ -1,10 +1,16 @@
 import React from 'react';
 import TodoItem from "./TodoItem";
+import { initContacts } from '../herpers/constants';
 
-const TodoContact = ({contacts}) =>{
+const TodoContact = ({searchValue}) => {
+    const filteredContacts = initContacts.filter(contact => (
+        contact.firstName.toLowerCase().includes(searchValue) || 
+        contact.lastName.toLowerCase().includes(searchValue) ||
+        contact.phone.includes(searchValue)
+    ))
     return(
        <div>
-           {contacts.map((contact,i)=>{
+           {filteredContacts.map((contact,i)=>{
                 return  <TodoItem item={contact} key={contact.id} />
             })
            }
